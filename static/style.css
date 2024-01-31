@@ -1,0 +1,115 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    background-color: #fffcf8;
+    color: #555;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    background-color: #fff3de;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-family: 'Raleway', cursive;
+    color: #ffbb46;
+}
+
+/* Form Elements Style */
+input[type="file"],
+input[type="submit"],
+select,
+input[type="text"] {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ffce79;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #ffce79;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="submit"]:hover {
+    background-color: #ffbb46;
+    transform: scale(1.05);
+}
+
+/* Custom Radio Buttons */
+.radio-group {
+    margin: 10px 0;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ffce79;
+    border-radius: 15px;
+    background-color: #ffeac5;
+    transition: background-color 0.3s;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #ffbb46;
+    color: white;
+}
+
+#result {
+    font-size: 22px;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ffd693;
+    border-radius: 8px;
+    background-color: #fff3df;
+    color: #666;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.file-upload-label:hover {
+    background-color: #ffd693;
+    color: white;
+}
+
+.file-name-display {
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Breed Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        function toggleBreedSelection() {
+            var noSelected = document.getElementById("no").checked;
+            var breedSelectionDiv = document.getElementById("breedSelection");
+
+            breedSelectionDiv.style.display = noSelected ? "block" : "none";
+
+            if (!noSelected) {
+                document.getElementById("otherBreed").style.display = "none";
+            }
+        }
+
+        function showOtherBreedInput() {
+            var selectedBreed = document.getElementById("correctLabel").value;
+            var otherBreedInput = document.getElementById("otherBreed");
+            otherBreedInput.style.display = selectedBreed === "other" ? "block" : "none";
+        }
+
+        document.getElementById('fileUpload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('fileNameDisplay').textContent = fileName;
+        });
+    </script>
+
+    <div class="container">
+        <h1>Cat Breed Classifier</h1>
+        <p>Upload an image of a cat, and the AI will predict its breed.</p>
+
+        <!-- Image upload form -->
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <label for="fileUpload" class="file-upload-label">Choose a file</label>
+            <input type="file" id="fileUpload" name="image" accept="image/*" style="display: none;">
+            <div id="fileNameDisplay" class="file-name-display"></div>
+            <input type="submit" value="Upload and Predict">
+        </form>
+
+
+        <!-- Results section -->
+        <div class="results">
+            <p id="result">Predicted Breed: {{ prediction }}</p>
+        </div>
+
+        <!-- Feedback form -->
+        <form action="/feedback" method="post">
+            <p>Was the prediction correct?</p>
+            <div class="radio-group">
+                <input type="radio" id="yes" name="feedback" value="correct" onchange="toggleBreedSelection()">
+                <label for="yes">Yes</label>
+                <input type="radio" id="no" name="feedback" value="incorrect" onchange="toggleBreedSelection()">
+                <label for="no">No</label>
+            </div>
+
+            <div id="breedSelection" style="display:none;">
+                <label for="correctLabel">If incorrect, please select the correct breed:</label>
+                <select name="correctLabel" id="correctLabel" onchange="showOtherBreedInput()">
+                    {% for breed in cat_breeds %}
+                    <option value="{{ breed }}">{{ breed }}</option>
+                    {% endfor %}
+                    <option value="other">Other</option>
+                </select>
+
+                <div id="otherBreed" style="display:none;">
+                    <label for="otherBreedName">Please specify the breed:</label>
+                    <input type="text" id="otherBreedName" name="otherBreedName">
+                </div>
+            </div>
+
+            <input type="submit" value="Submit Feedback">
+        </form>
+
+    </div>
+</body>
+</html>
